@@ -1,0 +1,38 @@
+<!--<app-drawer *ngIf="!inNewWindow"-->
+<!--            (visibleChange)="onVisibleChange($event)"-->
+<!--            [visible]="visible"-->
+<!--            [header]="'Remote Desktop ' + machineName + (fps ? (' fps:'+ fps) : '')">-->
+<!--  <div HeaderButtonExtras>-->
+<!--    <i (click)="openNewWindows()" class="fa fa-external-link new-window-btn"></i>-->
+<!--  </div>-->
+<!--  <div style="padding-bottom: 16px" class="remote-desktop">-->
+<!--    <ng-container [ngTemplateOutlet]="backgroundImageTemplate"></ng-container>-->
+<!--  </div>-->
+<!--</app-drawer>-->
+
+<!--<ng-container *ngIf="inNewWindow">-->
+  <div class="remote-desktop-full">
+    <ng-container [ngTemplateOutlet]="backgroundImageTemplate"></ng-container>
+  </div>
+<!--</ng-container>-->
+
+<ng-template #backgroundImageTemplate>
+  <div *ngIf="disconnected" class="disconnected-container">
+    <p class="disconnected">Disconnected...</p>
+  </div>
+  <!--  <ng-container *ngIf="!viaCanvas">-->
+  <div [ngClass]="{'blurred': disconnected}" *ngIf="base64Image" class="remote-desktop" [style.backgroundImage]="'url(' + base64Image + ')'"></div>
+  <div *ngIf="!base64Image"
+       style="display: flex; flex-direction: column; align-items: center; justify-content: center"
+       class="remote-desktop">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+  <!--  </ng-container>-->
+  <!--  <ng-container *ngIf="viaCanvas">-->
+  <!--    <div class="remote-desktop-full">-->
+  <!--      <app-canvas-desktop-->
+  <!--        [base64]="base64Image"-->
+  <!--      ></app-canvas-desktop>-->
+  <!--    </div>-->
+  <!--  </ng-container>-->
+</ng-template>
